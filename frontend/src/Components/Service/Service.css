@@ -1,0 +1,33 @@
+.service {
+    .container {
+        width: 80%;
+        padding: 50px;
+        display: grid;
+        grid-template-columns: repeat(4, 250px);
+        gap: 50px;
+    }
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    .card {
+        font-size: 18px;
+        box-sizing: border-box;
+        padding: 20px;
+        color: #525152;
+        background-color: #F0F0F0;
+        width: 250px;
+        height: 250px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        border-radius: 15px;
+        border: 1px solid #bababa;
+        img {
+            width: 50%;
+        }
+        h2 {
+            color: #0083DB;
+        }
+    }
+}
