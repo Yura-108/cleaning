@@ -1,16 +1,30 @@
 import './App.css'
 import Header from "./Components/Header/Header.jsx";
-import Main from "./Components/Main/Main.jsx";
 import Footer from "./Components/Footer/Footer.jsx";
-import Service from "./Components/Service/Service.jsx";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Home from "./pages/home/Home.jsx";
+import Staff from "./pages/staff/Staff.jsx";
+import Services from "./Components/Services/Services.jsx";
+import RegService from "./pages/registrationService/RegService.jsx";
+import Registration from "@pages/registration/Registration.jsx";
+import Login from "@pages/login/Login.jsx";
+
 
 function App() {
   return (
     <div className="App">
+      <BrowserRouter>
         <Header />
-        <Main />
-        <Service />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/staff" element={<Staff />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/registration-service" element={<RegService />} />
+          <Route path="/registration" element={<Registration />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
         <Footer />
+      </BrowserRouter>
     </div>
   )
 }

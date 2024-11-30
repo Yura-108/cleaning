@@ -1,5 +1,6 @@
 import './Header.css';
-import logo from '../../assets/logo.png';
+import logo from '@images/logo.png';
+import {Link} from 'react-router-dom';
 
 export default function Header() {
     return (
@@ -10,10 +11,10 @@ export default function Header() {
                 </div>
                 <nav>
                     <ul>
-                        <li>Главная</li>
-                        <li>Услуги</li>
-                        <li>Цены</li>
-                        <li>Контакты</li>
+                        <li><Link to={"/"}>Главная</Link></li>
+                        <li><Link to={"/services"}>Услуги</Link></li>
+                        <li><Link to={"/staff"}>Наши сотрудники</Link></li>
+                        <li><Link to={"/registration-service"}>Заказать услугу</Link></li>
                     </ul>
                 </nav>
                 <div className="phone_number">

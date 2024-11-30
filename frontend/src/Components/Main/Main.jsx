@@ -1,5 +1,5 @@
 import './Main.css';
-import img from '../../assets/main.png'
+import img from '@images/main.png'
 
 export default function Main()  {
     return (
