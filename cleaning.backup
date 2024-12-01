@@ -1,0 +1,455 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 17.1
+-- Dumped by pg_dump version 17.1
+
+-- Started on 2024-11-30 11:42:38
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 222 (class 1259 OID 16414)
+-- Name: cleaner; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.cleaner (
+    id integer NOT NULL,
+    name character varying(100) NOT NULL,
+    phone character varying(15),
+    email character varying(100),
+    hired_date date DEFAULT CURRENT_DATE,
+    status character varying(50) DEFAULT 'active'::character varying,
+    rating numeric(3,2)
+);
+
+
+ALTER TABLE public.cleaner OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 16413)
+-- Name: cleaner_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.cleaner_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.cleaner_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4844 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: cleaner_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.cleaner_id_seq OWNED BY public.cleaner.id;
+
+
+--
+-- TOC entry 226 (class 1259 OID 16446)
+-- Name: cleaning_supplies; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.cleaning_supplies (
+    id integer NOT NULL,
+    name character varying(100) NOT NULL,
+    type character varying(50),
+    supplier character varying(100),
+    quantity_in_stock integer,
+    price numeric(10,2),
+    expiration_date date
+);
+
+
+ALTER TABLE public.cleaning_supplies OWNER TO postgres;
+
+--
+-- TOC entry 225 (class 1259 OID 16445)
+-- Name: cleaning_supplies_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.cleaning_supplies_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.cleaning_supplies_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4845 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: cleaning_supplies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.cleaning_supplies_id_seq OWNED BY public.cleaning_supplies.id;
+
+
+--
+-- TOC entry 218 (class 1259 OID 16390)
+-- Name: client; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.client (
+    id integer NOT NULL,
+    phone character varying(15),
+    email character varying(100),
+    address text,
+    registration_date date DEFAULT CURRENT_DATE,
+    first_name character varying(32),
+    last_name character varying(32)
+);
+
+
+ALTER TABLE public.client OWNER TO postgres;
+
+--
+-- TOC entry 217 (class 1259 OID 16389)
+-- Name: client_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.client_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.client_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4846 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: client_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.client_id_seq OWNED BY public.client.id;
+
+
+--
+-- TOC entry 224 (class 1259 OID 16423)
+-- Name: contract; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.contract (
+    id integer NOT NULL,
+    client_id integer,
+    premise_id integer,
+    cleaner_id integer,
+    start_date date NOT NULL,
+    end_date date,
+    total_cost numeric(10,2),
+    status character varying(50) DEFAULT 'active'::character varying
+);
+
+
+ALTER TABLE public.contract OWNER TO postgres;
+
+--
+-- TOC entry 223 (class 1259 OID 16422)
+-- Name: contract_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.contract_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.contract_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4847 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: contract_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.contract_id_seq OWNED BY public.contract.id;
+
+
+--
+-- TOC entry 220 (class 1259 OID 16400)
+-- Name: premise; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.premise (
+    id integer NOT NULL,
+    client_id integer,
+    type character varying(50),
+    address text,
+    square_meters numeric(10,2),
+    cleaning_schedule character varying(50)
+);
+
+
+ALTER TABLE public.premise OWNER TO postgres;
+
+--
+-- TOC entry 219 (class 1259 OID 16399)
+-- Name: premise_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.premise_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.premise_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4848 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: premise_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.premise_id_seq OWNED BY public.premise.id;
+
+
+--
+-- TOC entry 4664 (class 2604 OID 16417)
+-- Name: cleaner id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cleaner ALTER COLUMN id SET DEFAULT nextval('public.cleaner_id_seq'::regclass);
+
+
+--
+-- TOC entry 4669 (class 2604 OID 16449)
+-- Name: cleaning_supplies id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cleaning_supplies ALTER COLUMN id SET DEFAULT nextval('public.cleaning_supplies_id_seq'::regclass);
+
+
+--
+-- TOC entry 4661 (class 2604 OID 16393)
+-- Name: client id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.client ALTER COLUMN id SET DEFAULT nextval('public.client_id_seq'::regclass);
+
+
+--
+-- TOC entry 4667 (class 2604 OID 16426)
+-- Name: contract id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.contract ALTER COLUMN id SET DEFAULT nextval('public.contract_id_seq'::regclass);
+
+
+--
+-- TOC entry 4663 (class 2604 OID 16403)
+-- Name: premise id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.premise ALTER COLUMN id SET DEFAULT nextval('public.premise_id_seq'::regclass);
+
+
+--
+-- TOC entry 4834 (class 0 OID 16414)
+-- Dependencies: 222
+-- Data for Name: cleaner; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 4838 (class 0 OID 16446)
+-- Dependencies: 226
+-- Data for Name: cleaning_supplies; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 4830 (class 0 OID 16390)
+-- Dependencies: 218
+-- Data for Name: client; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.client (id, phone, email, address, registration_date, first_name, last_name) VALUES (1, '89001234567', 'ivanov@example.com', '??. ??????, ?. 10', '2024-11-18', NULL, NULL);
+INSERT INTO public.client (id, phone, email, address, registration_date, first_name, last_name) VALUES (2, '89007654321', 'petrova@example.com', '??. ?????????, ?. 5', '2024-11-18', NULL, NULL);
+INSERT INTO public.client (id, phone, email, address, registration_date, first_name, last_name) VALUES (3, NULL, NULL, NULL, '2024-11-19', 'Andrei', '21');
+
+
+--
+-- TOC entry 4836 (class 0 OID 16423)
+-- Dependencies: 224
+-- Data for Name: contract; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 4832 (class 0 OID 16400)
+-- Dependencies: 220
+-- Data for Name: premise; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 4849 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: cleaner_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.cleaner_id_seq', 1, false);
+
+
+--
+-- TOC entry 4850 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: cleaning_supplies_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.cleaning_supplies_id_seq', 1, false);
+
+
+--
+-- TOC entry 4851 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: client_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.client_id_seq', 3, true);
+
+
+--
+-- TOC entry 4852 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: contract_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.contract_id_seq', 1, false);
+
+
+--
+-- TOC entry 4853 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: premise_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.premise_id_seq', 1, false);
+
+
+--
+-- TOC entry 4675 (class 2606 OID 16421)
+-- Name: cleaner cleaner_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cleaner
+    ADD CONSTRAINT cleaner_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4679 (class 2606 OID 16451)
+-- Name: cleaning_supplies cleaning_supplies_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cleaning_supplies
+    ADD CONSTRAINT cleaning_supplies_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4671 (class 2606 OID 16398)
+-- Name: client client_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.client
+    ADD CONSTRAINT client_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4677 (class 2606 OID 16429)
+-- Name: contract contract_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.contract
+    ADD CONSTRAINT contract_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4673 (class 2606 OID 16407)
+-- Name: premise premise_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.premise
+    ADD CONSTRAINT premise_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4681 (class 2606 OID 16440)
+-- Name: contract contract_cleaner_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.contract
+    ADD CONSTRAINT contract_cleaner_id_fkey FOREIGN KEY (cleaner_id) REFERENCES public.cleaner(id) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 4682 (class 2606 OID 16430)
+-- Name: contract contract_client_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.contract
+    ADD CONSTRAINT contract_client_id_fkey FOREIGN KEY (client_id) REFERENCES public.client(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4683 (class 2606 OID 16435)
+-- Name: contract contract_premise_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.contract
+    ADD CONSTRAINT contract_premise_id_fkey FOREIGN KEY (premise_id) REFERENCES public.premise(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4680 (class 2606 OID 16408)
+-- Name: premise premise_client_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.premise
+    ADD CONSTRAINT premise_client_id_fkey FOREIGN KEY (client_id) REFERENCES public.client(id) ON DELETE CASCADE;
+
+
+-- Completed on 2024-11-30 11:42:38
+
+--
+-- PostgreSQL database dump complete
+--
+

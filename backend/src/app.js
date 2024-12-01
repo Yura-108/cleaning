@@ -1,30 +1,29 @@
 const express = require('express');
 const app = express();
-const routes = require('./routes');
-const {body, validationResult} = require('express-validator');
+const authRoutes = require('./routes/auth');
+const servicesRoutes = require('./routes/services');
+const cleanersRoutes = require('./routes/cleaners');
+const premiseRoutes = require('./routes/premise');
+const cors = require('cors');
 
+
+// Настройка CORS
+app.use(cors({
+  origin: 'http://localhost:5173', // Укажите адрес фронтенда
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Разрешенные методы
+  credentials: true, // Если используются куки
+}));
+
+// Middleware
 app.use(express.json());
 
-app.post('/client',
-    body('first_name').notEmpty(),
-    body('last_name').notEmpty(),
-    (req, res, next) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({errors: errors});
-        }
-        next();
-    },
-    routes
-);
+// Роуты
+app.use('/auth', authRoutes);
+app.use('/api', servicesRoutes);
+app.use('/api', cleanersRoutes);
+app.use('/api', premiseRoutes);
 
-app.use('/api', routes);
-
-app.use((req, res, next) => {
-    res.status(500).send('Something went wrong');
+// Запуск сервера
+app.listen(3000, () => {
+  console.log('Сервер запущен на порту 3000');
 });
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-})
