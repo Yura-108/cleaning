@@ -1,0 +1,37 @@
+.container-form {
+    text-align: center;
+
+    .auth {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        select {
+            width: 230px;
+            height: 35px;
+            font-size: 16px;
+            margin-top: 10px;
+            padding: 5px;
+        }
+        input {
+            width: 220px;
+            height: 20px;
+            font-size: 16px;
+            margin-top: 10px;
+            padding: 5px;
+        }
+        button {
+            box-sizing: content-box;
+            width: 220px;
+            height: 20px;
+            margin-top: 10px;
+            padding: 5px;
+            color: white;
+            font-weight: 500;
+            font-size: 16px;
+            border: none;
+            background-color: #009E67;
+            cursor: pointer;
+        }
+    }
+}

@@ -10,9 +10,9 @@ exports.getClient = async (req, res) => {
 }
 
 exports.createClient = async (req, res) => {
-    const { first_name, last_name } = req.body;
+    const { name, phone, email } = req.body;
     try {
-        const result = await pool.query('INSERT INTO client (first_name, last_name) VALUES ($1, $2) RETURNING *', [first_name, last_name]);
+        const result = await pool.query('INSERT INTO client (name, phone, email) VALUES ($1, $2, $3) RETURNING *', [name, phone, email]);
         res.status(201).json(result.rows[0]);
     } catch (err) {
         res.status(500).json({error: err.message});

@@ -8,7 +8,9 @@ import Services from "./Components/Services/Services.jsx";
 import RegService from "./pages/registrationService/RegService.jsx";
 import Registration from "@pages/registration/Registration.jsx";
 import Login from "@pages/login/Login.jsx";
+import PremisesForm from "@pages/premise/PremisesForm.jsx";
 
+// contract
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
           <Route path="/registration-service" element={<RegService />} />
           <Route path="/registration" element={<Registration />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/premises" element={<PremisesForm />} />
         </Routes>
         <Footer />
       </BrowserRouter>
@@ -30,3 +33,4 @@ function App() {
 }
 
 export default App
+

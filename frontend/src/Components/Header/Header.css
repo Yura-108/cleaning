@@ -20,14 +20,21 @@ header {
             }
         }
         nav {
-            width: 70%;
+            width: 50%;
             ul {
+                width: 100%;
                 list-style: none;
                 display: flex;
-                justify-content: center;
+                justify-content: space-around;
                 align-items: center;
+                button {
+                    text-decoration: none;
+                    color: #0083DB;
+                    border: none;
+                    outline: none;
+                    font-size: 18px;
+                }
                 li {
-                    margin-left: 5%;
                     cursor: pointer;
                     a {
                         text-decoration: none;
