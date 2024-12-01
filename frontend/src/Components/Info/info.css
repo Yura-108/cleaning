@@ -1,0 +1,38 @@
+.sectionInfo {
+    background-color: #0083DB;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .container {
+        width: 1280px;
+        display: flex;
+        justify-content: space-between;
+        .left, .right {
+            padding: 20px;
+        }
+        h2, h4, p, ul, ol {
+            color: white;
+        }
+        h2 {
+            font: normal bold 24px 'Roboto', Arial, sans-serif;
+        }
+        p {
+            margin-top: 15px;
+            font: normal bold 16px 'Roboto', Arial, sans-serif;
+            line-height: 24px;
+        }
+        h4 {
+            margin-top: 10px;
+            font: normal bold 20px 'Roboto', Arial, sans-serif;
+        }
+        ul, ol {
+            padding: 0 20px;
+            margin-top: 10px;
+            li {
+                margin-top: 5px;
+            }
+        }
+
+    }
+}

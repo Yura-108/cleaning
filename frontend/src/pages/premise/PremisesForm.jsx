@@ -5,7 +5,6 @@ import {useNavigate} from "react-router-dom";
 import {jwtDecode} from "jwt-decode";
 import {isAuthenticated} from "@utils/isAuthenticated.js";
 import Premises from "@pages/premise/Premises.jsx";
-import {useMutation, useQueryClient} from "@tanstack/react-query";
 
 const PremisesForm = () => {
   const [formData, setFormData] = useState({
