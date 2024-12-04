@@ -2,10 +2,9 @@ import {useEffect, useRef, useState} from 'react';
 import axios from 'axios';
 import '@styles/auth.css';
 import {useNavigate} from "react-router-dom";
-import {jwtDecode} from "jwt-decode";
 import {isAuthenticated} from "@utils/isAuthenticated.js";
 import Premises from "@pages/premise/Premises.jsx";
-import {useMutation, useQueryClient} from "@tanstack/react-query";
+import getClientId from "@utils/getClientId.js";
 
 const PremisesForm = () => {
   const [formData, setFormData] = useState({
@@ -17,14 +16,6 @@ const PremisesForm = () => {
 
   const navigate = useNavigate();
 
-  const getClientId = () => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const decode = jwtDecode(token);
-      return decode.id;
-    }
-    return null;
-  }
 
   useEffect(() => {
     if (!isAuthenticated()) navigate('/login');
@@ -35,10 +26,7 @@ const PremisesForm = () => {
   const handleChange = (e) => {
     setFormData({...formData, [e.target.name]: e.target.value});
   };
-  console.log({
-    ...formData,
-    client_id: refClientId.current,
-  })
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!refClientId) {

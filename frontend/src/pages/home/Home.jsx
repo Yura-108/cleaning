@@ -1,13 +1,13 @@
 import Main from "../../Components/Main/Main.jsx";
+import Info from "@components/Info/Info.jsx";
 import './home.css'
-import Services from "../../Components/Services/Services.jsx";
 
 function Home() {
   return (
-    <section className="home">
+    <>
       <Main />
-      <Services />
-    </section>
+      <Info />
+    </>
   )
 }
 

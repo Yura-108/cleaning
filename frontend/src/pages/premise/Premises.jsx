@@ -17,7 +17,7 @@ function Card({premise}) {
 
 Card.propTypes = {
   premise: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     type: PropTypes.string.isRequired,
     address: PropTypes.string.isRequired,
     square_meters: PropTypes.string.isRequired,
@@ -28,11 +28,11 @@ Card.propTypes = {
 
 const Premises = ({clientId}) => {
   const {data, isLoading, isError, error} = useQuery({
-    queryKey: ['staff'],
+    queryKey: ['premises'],
     queryFn: fetchPremises,
-    //select: (data) => data.filter(premise => premise.id === clientId),
+    select: (data) => data.filter(premise => premise.client_id === clientId),
   });
-  console.log(clientId)
+
   if (isLoading) {
     return <div>Загрузка...</div>;
   }

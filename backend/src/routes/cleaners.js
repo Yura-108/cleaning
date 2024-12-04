@@ -16,7 +16,6 @@ router.get('/cleaners', async (req, res) => {
 router.post('/cleaners', async (req, res) => {
   const { name, phone, email, rating, image_url } = req.body;
 
-  // Валидация входных данных
   if (!name && !phone && !email && !rating) {
     return res.status(400).json({ message: 'Вы не ввели все данные!' });
   }

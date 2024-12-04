@@ -7,7 +7,7 @@
         justify-content: center;
         align-items: center;
         select {
-            width: 230px;
+            width: 260px;
             height: 35px;
             font-size: 16px;
             margin-top: 10px;
@@ -22,8 +22,8 @@
         }
         button {
             box-sizing: content-box;
-            width: 220px;
-            height: 20px;
+            width: 250px;
+            height: 25px;
             margin-top: 10px;
             padding: 5px;
             color: white;
